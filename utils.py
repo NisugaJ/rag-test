@@ -1,4 +1,4 @@
-#!pip install python-dotenv
+#!pip install python-dotenv numpy trulens-eval llama-index openai
 
 
 import os
@@ -14,19 +14,23 @@ from trulens_eval import (
 from trulens_eval.feedback import Groundedness
 import nest_asyncio
 
+load_dotenv()
 nest_asyncio.apply()
 
 
-def get_openai_api_key():
+def load_env():
     _ = load_dotenv(find_dotenv())
 
+
+def get_openai_api_key():
+    load_env()
     return os.getenv("OPENAI_API_KEY")
 
 
 def get_hf_api_key():
-    _ = load_dotenv(find_dotenv())
-
+    load_env()
     return os.getenv("HUGGINGFACE_API_KEY")
+
 
 openai = OpenAI()
 
